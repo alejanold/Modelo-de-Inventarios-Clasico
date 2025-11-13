@@ -1,6 +1,5 @@
 # Modelo de Inventarios EOQ Clásico
 # Autor: Ale Ortiz
-# Ingeniería en Sistemas Computacionales - 3er semestre
 
 import math
 
@@ -47,3 +46,12 @@ print(f"   Le = {dias_entrega} - ({dias_entrega} / {t_ciclo_redondeado})")
 Le = dias_entrega - (dias_entrega / t_ciclo)
 Le_redondeado = round(Le, 2)
 print(f"   Le = {Le_redondeado}")
+
+# Parte 5: Segundo punto de reorden (Le * D)
+# Este será el complemento de la parte anterior, porque tambien debemos saber la cantidad de inventario que debemos pedir
+print("\n5) Cálculo del segundo punto de reorden (Le * D)")
+print(f"   Le * D = {Le_redondeado} * {demanda}")
+punto_reorden = Le * demanda
+punto_reorden_redondeado = round(punto_reorden, 2)
+print(f"   Le * D = {punto_reorden_redondeado}")
+
