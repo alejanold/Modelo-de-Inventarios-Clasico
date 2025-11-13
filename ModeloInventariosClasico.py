@@ -22,3 +22,12 @@ print(f"   y* = √(2 * {demanda} / {costo_almacenamiento})")
 y_optimo = math.sqrt((2 * demanda) / costo_almacenamiento)
 y_optimo_redondeado = round(y_optimo, 2)
 print(f"   y* = {y_optimo_redondeado}")
+
+# Parte 2: Duración del ciclo (t°)
+# Fórmula: t° = y* / D
+# Esta parte muestra cuánto dura cada ciclo del inventario
+print("\n2) Cálculo de la duración del ciclo (t°)")
+print(f"   t° = {y_optimo_redondeado} / {demanda}")
+t_ciclo = y_optimo / demanda
+t_ciclo_redondeado = round(t_ciclo, 4)
+print(f"   t° = {t_ciclo_redondeado} días")
