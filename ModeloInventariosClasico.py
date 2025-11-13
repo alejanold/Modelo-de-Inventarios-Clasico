@@ -4,7 +4,7 @@
 
 import math
 
-print("==== MODELO DE INVENTARIOS EOQ CLÁSICO ====\n")
+print("==== Modelo de inventarios EOQ Clasico ====\n")
 
 # Aquí pediré los datos para aplicar el modelo
 costo_pedido = float(input("Ingresa el costo de pedido (K): "))
@@ -31,3 +31,19 @@ print(f"   t° = {y_optimo_redondeado} / {demanda}")
 t_ciclo = y_optimo / demanda
 t_ciclo_redondeado = round(t_ciclo, 4)
 print(f"   t° = {t_ciclo_redondeado} días")
+
+# Parte 3: Entero mas grande (n = L / t°)
+# Complementando el anterior este nos servira para determinar los ciclos que puede haber en el tiempo de entrega (muy extenso lo sé)
+print("\n3) Cálculo del entero más grande (n = L / t°)")
+print(f"   n = {dias_entrega} / {t_ciclo_redondeado}")
+n = int(dias_entrega / t_ciclo)
+print(f"   n = {n}")
+
+# Parte 4: Punto de reorden (Le)
+# Fórmula: Le = L - (L / t°)
+# Aquí pues, sabremos cada cuantos dias o tal vez ninguno hay que hacer un pedido
+print("\n4) Cálculo del punto de reorden (Le)")
+print(f"   Le = {dias_entrega} - ({dias_entrega} / {t_ciclo_redondeado})")
+Le = dias_entrega - (dias_entrega / t_ciclo)
+Le_redondeado = round(Le, 2)
+print(f"   Le = {Le_redondeado}")
