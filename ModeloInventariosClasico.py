@@ -1,4 +1,4 @@
-# Modelo de Inventarios EOQ Clásico
+# Modelo de Inventarios EOQ Clásico + Inventarios con descuento
 # Autor: Ale Ortiz
 
 import math
@@ -102,13 +102,13 @@ for i in range(niveles):
     # En este parte, el costo de almacenamiento depende del precio por unidad
     h_nivel = 0.25 * precios[i]
 
-    # El EOQ aqui, se recalcula usando el costo de almacenamiento.
+    # El EOQ aqui, se recalcula usando el costo de almacenamiento
     Q_nivel = math.sqrt((2 * demanda * costo_pedido) / h_nivel)
     Q_red = round(Q_nivel, 2)
 
     print(f"  EOQ nivel {i+1}: Q = √((2 * {demanda} * {costo_pedido}) / {h_nivel}) = {Q_red}")
 
-    # y aqui si el EOQ no alcanza la cantidad mínima que nos pide el proveedor, se tiene que ajustar.
+    # y aqui si el EOQ no alcanza la cantidad mínima que nos pide el proveedor, se tiene que ajustar
     if Q_nivel < cantidades_min[i]:
         print(f"  Q calculado NO alcanza el mínimo. Se ajusta a {cantidades_min[i]}")
         Q_nivel = cantidades_min[i]
@@ -121,16 +121,20 @@ for i in range(niveles):
     TCU_red = round(TCU_nivel, 2)
     print(f"  TCU nivel {i+1}: {TCU_red}")
 
-# DEspues de eso, aqui se entra en una tipo revision para corroborar resultados y saber si es el mejor.
+# DEspues de eso, aqui se entra en una tipo revision para corroborar resultados y saber si es el mejor
     if mejor_TCU is None or TCU_nivel < mejor_TCU:
         mejor_TCU = TCU_nivel
         mejor_Q = Q_nivel
         mejor_precio = precios[i]
 
-# ya haciendo las operaciones con todos los niveles, aqui se muestra cuál puede convenir más.
+# ya haciendo las operaciones con todos los niveles, aqui se muestra cuál puede convenir más
 print("\n- Resultado final -")
 print(f"El mejor nivel es con precio ${mejor_precio}")
 print(f"Cantidad a pedir (Q): {round(mejor_Q, 2)} unidades")
 print(f"Costo total mínimo: ${round(mejor_TCU, 2)}")
 
-
+# Por fin aqui se hace la interpretacion y se lanzan los resultados finales
+print("\nConclusión:")
+print(f"Conviene comprar al precio ${mejor_precio}, pidiendo {round(mejor_Q, 2)} unidades,")
+print("porque ese nivel da el costo total más bajo considerando el almacenamiento,")
+print("los pedidos y el precio que cobrara el proveedor.")
