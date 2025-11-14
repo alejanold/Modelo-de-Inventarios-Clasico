@@ -70,3 +70,31 @@ print("\n=== En conclusión ===")
 print(f"Se deben pedir {y_optimo_redondeado} cantidad cada {Le_redondeado} días "
       f"o cada que el inventario caiga a {punto_reorden_redondeado} unidades.")
 print(f"\nCosto total del inventario (TCU): ${TCU_redondeado}")
+
+#   Parte sorpresa: INVENTARIOS CON DESCUENTO
+# ============================================
+# Segun yo aqui es revisar cada nivel y ver cuál conviene más.
+
+print("\n==== Modelo de inventarios con descuento ====\n")
+
+# Aquí se va a pedir cuántos niveles maneja el proveedor
+niveles = int(input("Ingrese cuántos niveles de descuento ofrece el proveedor: "))
+
+# Guardo los precios y las cantidades
+precios = []
+cantidades_min = []
+
+# Aqui me confundi, porque se debe pedir la informacion de precio y cantidad mínima jaja
+for i in range(niveles):
+    print(f"\nNivel {i+1}:")
+    precio = float(input("  Ingrese el precio por unidad en este nivel: "))
+    cantidad_min = float(input("  Cantidad mínima para obtener este precio: "))
+    precios.append(precio)
+    cantidades_min.append(cantidad_min)
+
+print("\n--- Calculando cada nivel ---")
+
+# Estas variables nos sirven para quedarnos con la mejor opción
+mejor_TCU = None
+mejor_Q = None
+mejor_precio = None
