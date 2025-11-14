@@ -90,7 +90,7 @@ for i in range(niveles):
     cantidad_min = float(input("  Cantidad mínima para obtener este precio: "))
     precios.append(precio)
     cantidades_min.append(cantidad_min)
-print("\n--- Calculando cada nivel ---")
+print("\n- Calculando cada nivel -")
 
 # Estas variables nos sirven para quedarnos con la mejor opción
 mejor_TCU = None
@@ -120,3 +120,17 @@ for i in range(niveles):
     TCU_nivel = (demanda / Q_nivel) * costo_pedido + (h_nivel * (Q_nivel / 2)) + (demanda * precios[i])
     TCU_red = round(TCU_nivel, 2)
     print(f"  TCU nivel {i+1}: {TCU_red}")
+
+# DEspues de eso, aqui se entra en una tipo revision para corroborar resultados y saber si es el mejor.
+    if mejor_TCU is None or TCU_nivel < mejor_TCU:
+        mejor_TCU = TCU_nivel
+        mejor_Q = Q_nivel
+        mejor_precio = precios[i]
+
+# ya haciendo las operaciones con todos los niveles, aqui se muestra cuál puede convenir más.
+print("\n- Resultado final -")
+print(f"El mejor nivel es con precio ${mejor_precio}")
+print(f"Cantidad a pedir (Q): {round(mejor_Q, 2)} unidades")
+print(f"Costo total mínimo: ${round(mejor_TCU, 2)}")
+
+
