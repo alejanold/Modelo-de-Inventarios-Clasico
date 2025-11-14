@@ -63,3 +63,10 @@ print(f"   TCU = ({costo_pedido} / {y_optimo_redondeado} * {demanda}) + ({costo_
 TCU = (costo_pedido / y_optimo * demanda) + (costo_almacenamiento * (y_optimo / 2))
 TCU_redondeado = round(TCU, 2)
 print(f"   TCU = ${TCU_redondeado}")
+
+# Parte final: En conclusión
+# Pues ya estaria, aqui como en clase solo dare un enunciado sencillo indicando cada cuantos dias o a partir de que cantidad hacer un pedido
+print("\n=== En conclusión ===")
+print(f"Se deben pedir {y_optimo_redondeado} cantidad cada {Le_redondeado} días "
+      f"o cada que el inventario caiga a {punto_reorden_redondeado} unidades.")
+print(f"\nCosto total del inventario (TCU): ${TCU_redondeado}")
