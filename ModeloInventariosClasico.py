@@ -3,7 +3,7 @@
 
 import math
 
-print("==== Modelo de inventarios EOQ Clasico ====\n")
+print("- Modelo de inventarios EOQ Clasico -\n")
 
 # Aquí pediré los datos para aplicar el modelo
 costo_pedido = float(input("Ingresa el costo de pedido (K): "))
@@ -11,7 +11,7 @@ demanda = float(input("Ingresa la demanda del producto (D): "))
 costo_almacenamiento = float(input("Ingresa el costo de almacenamiento y proceso (h): "))
 dias_entrega = float(input("Ingrese en cuántos días recibes tu pedido (L): "))
 
-print("\n=== Aqui va el paso a paso ===")
+print("\n- Aqui va el paso a paso -")
 
 # Parte 1: punto optimo de pedido (y*)
 # Formula: y* = √(2 * D / h)
@@ -72,7 +72,6 @@ print(f"Se deben pedir {y_optimo_redondeado} cantidad cada {Le_redondeado} días
 print(f"\nCosto total del inventario (TCU): ${TCU_redondeado}")
 
 #   Parte sorpresa: INVENTARIOS CON DESCUENTO
-# ============================================
 # Segun yo aqui es revisar cada nivel y ver cuál conviene más.
 
 print("\n==== Modelo de inventarios con descuento ====\n")
@@ -91,10 +90,33 @@ for i in range(niveles):
     cantidad_min = float(input("  Cantidad mínima para obtener este precio: "))
     precios.append(precio)
     cantidades_min.append(cantidad_min)
-
 print("\n--- Calculando cada nivel ---")
 
 # Estas variables nos sirven para quedarnos con la mejor opción
 mejor_TCU = None
 mejor_Q = None
 mejor_precio = None
+for i in range(niveles):
+    print(f"\n>>> Nivel {i+1} (precio = {precios[i]}, mínimo = {cantidades_min[i]})")
+
+    # En este parte, el costo de almacenamiento depende del precio por unidad
+    h_nivel = 0.25 * precios[i]
+
+    # El EOQ aqui, se recalcula usando el costo de almacenamiento.
+    Q_nivel = math.sqrt((2 * demanda * costo_pedido) / h_nivel)
+    Q_red = round(Q_nivel, 2)
+
+    print(f"  EOQ nivel {i+1}: Q = √((2 * {demanda} * {costo_pedido}) / {h_nivel}) = {Q_red}")
+
+    # y aqui si el EOQ no alcanza la cantidad mínima que nos pide el proveedor, se tiene que ajustar.
+    if Q_nivel < cantidades_min[i]:
+        print(f"  Q calculado NO alcanza el mínimo. Se ajusta a {cantidades_min[i]}")
+        Q_nivel = cantidades_min[i]
+
+    # para que no se me olvide sobre el costo de inventario:
+    # (D/Q)*K: costo de realizar pedidos
+    # h*(Q/2): costo de mantener inventario
+    # D*precio: costo de comprar el producto
+    TCU_nivel = (demanda / Q_nivel) * costo_pedido + (h_nivel * (Q_nivel / 2)) + (demanda * precios[i])
+    TCU_red = round(TCU_nivel, 2)
+    print(f"  TCU nivel {i+1}: {TCU_red}")
